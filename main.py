@@ -30,7 +30,7 @@ spark_s = pygame.transform.scale(spark_img, (SPARKHEIGHT, SPARKWIDTH))
 clock = pygame.time.Clock()
 
 class Mosquito(pygame.sprite.Sprite):
-    def __init__(self, speed, main_game):  # Add the main_game argument here
+    def __init__(self, speed, main_game): 
         super().__init__()
         self.image = mosquito_s
         self.rect = self.image.get_rect()
@@ -40,7 +40,7 @@ class Mosquito(pygame.sprite.Sprite):
         self.rect.y = self.spawn_y
         self.speed = speed
         self.angle = random.uniform(0, math.pi * 2)
-        self.main_game = main_game  # Store the main_game object
+        self.main_game = main_game  
 
     def update(self):
         self.rect.x += self.speed
@@ -48,8 +48,7 @@ class Mosquito(pygame.sprite.Sprite):
         self.angle += 0.1
         if self.rect.x > window_width:
             self.kill()
-            decrease_miss(self.main_game)  # pass the main_game object
-
+            decrease_miss(self.main_game)  
 
 class Spark(pygame.sprite.Sprite):
     def __init__(self, position):
@@ -64,7 +63,7 @@ class Spark(pygame.sprite.Sprite):
             self.kill()
 
 def decrease_miss(main_game):
-    main_game.misses -= 1  # Decreasing the value correctly
+    main_game.misses -= 1  
     if main_game.misses <= 0:
         game_over(main_game.score)
 
@@ -141,8 +140,8 @@ def main():
 
         if main_game.score // 10 > last_score_checkpoint:
             last_score_checkpoint = main_game.score // 10
-            mosquito_spawn_interval *= 0.9  # Increase the frequency
-            speed_increase_interval *= 0.9  # Increase the randomness
+            mosquito_spawn_interval *= 0.9  
+            speed_increase_interval *= 0.9  
 
         if mosquito_spawn_timer >= mosquito_spawn_interval:
             new_mosquito = Mosquito(mosquito_speed, main_game)
